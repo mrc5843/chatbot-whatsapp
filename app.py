@@ -1,10 +1,12 @@
 from flask import Flask, request
-from twilio.twiml.messaging_response import MessagingResponse
-
 app = Flask(__name__)
 
-@app.route('/whatsapp', methods=['POST'])
-def whatsapp():
+@app.route('/')
+def home():
+    return "Chatbot activo 😎"
+
+@app.route('/webhook', methods=['POST'])
+def webhook():
     mensaje = request.form.get('Body')
     respuesta = MessagingResponse()
     mensaje_respuesta = respuesta.message()
