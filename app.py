@@ -13,11 +13,6 @@ def webhook():
     print(f"Mensaje recibido: {incoming_msg}")
 
     respuesta = MessagingResponse()
-    mensaje = respuesta.message(f"Recibido: {incoming_msg}")
+    respuesta.message(f"Recibido: {incoming_msg}")
     
     return str(respuesta)
-
-if __name__ == '__main__':
-    import os
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=True)
