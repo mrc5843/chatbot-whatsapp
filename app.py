@@ -1,12 +1,12 @@
 @app.route('/webhook', methods=['POST'])
 def webhook():
-    incoming_msg = request.form.get('Body').lower().strip()
+    incoming_msg = request.form.get('Body', '').lower().strip()
     print(f"Mensaje recibido: {incoming_msg}")
 
     respuesta = MessagingResponse()
 
-    # Palabras que activan la bienvenida
-    saludos = ["hola", "buen dia", "buenos dias", "buenas tardes"]
+    # Saludos que activan el menú
+    saludos = ["hola", "buen día", "buen dia", "buenos días", "buenos dias", "buenas tardes"]
 
     if any(saludo in incoming_msg for saludo in saludos):
         respuesta.message("👋 ¡Hola! Bienvenido al asistente virtual.")
