@@ -1,3 +1,8 @@
+from flask import Flask, request
+from twilio.twiml.messaging_response import MessagingResponse
+
+app = Flask(__name__)
+
 @app.route('/webhook', methods=['POST'])
 def webhook():
     incoming_msg = request.form.get('Body', '').lower().strip()
@@ -5,7 +10,6 @@ def webhook():
 
     respuesta = MessagingResponse()
 
-    # Convertimos el mensaje a minúscula y revisamos si contiene palabras clave
     if any(palabra in incoming_msg for palabra in ["hola", "buen dia", "buenos dias", "buenos días", "buenas tardes"]):
         respuesta.message("👋 ¡Hola! Bienvenido al asistente virtual.")
         respuesta.message(
