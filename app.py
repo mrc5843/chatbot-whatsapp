@@ -33,3 +33,8 @@ def webhook():
         respuesta.message("🤖 No entendí ese mensaje. Por favor escriba un número del 1 al 5 o un saludo para ver el menú.")
 
     return str(respuesta)
+
+# Ejecutar con el puerto que entrega Render
+if __name__ == '__main__':
+    puerto = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=puerto)
