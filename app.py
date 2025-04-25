@@ -5,10 +5,8 @@ def webhook():
 
     respuesta = MessagingResponse()
 
-    # Saludos que activan el menú
-    saludos = ["hola", "buen día", "buen dia", "buenos días", "buenos dias", "buenas tardes"]
-
-    if any(saludo in incoming_msg for saludo in saludos):
+    # Convertimos el mensaje a minúscula y revisamos si contiene palabras clave
+    if any(palabra in incoming_msg for palabra in ["hola", "buen dia", "buenos dias", "buenos días", "buenas tardes"]):
         respuesta.message("👋 ¡Hola! Bienvenido al asistente virtual.")
         respuesta.message(
             "❓ ¿En qué podemos ayudarte hoy?\n"
@@ -18,16 +16,15 @@ def webhook():
             "4️⃣ Problemas con la Firma\n"
             "5️⃣ Otros"
         )
-    elif incoming_msg == "1":
-        respuesta.message("✅ Entendido. Revisaremos el acceso al sistema SIDE.")
-    elif incoming_msg == "2":
-        respuesta.message("📄 Por favor, indique el tipo de problema con el documento.")
-    elif incoming_msg == "3":
-        respuesta.message("👤 ¿Podría describir el problema con el funcionario?")
-    elif incoming_msg == "4":
-        respuesta.message("🖊️ ¿Tiene error con la Firma Electrónica o con el sistema?")
-    elif incoming_msg == "5":
-        respuesta.message("📬 Describa brevemente su situación para poder ayudarle.")
+    elif incoming_msg in ["1", "2", "3", "4", "5"]:
+        opciones = {
+            "1": "✅ Entendido. Revisaremos el acceso al sistema SIDE.",
+            "2": "📄 Por favor, indique el tipo de problema con el documento.",
+            "3": "👤 ¿Podría describir el problema con el funcionario?",
+            "4": "🖊️ ¿Tiene error con la Firma Electrónica o con el sistema?",
+            "5": "📬 Describa brevemente su situación para poder ayudarle."
+        }
+        respuesta.message(opciones[incoming_msg])
     else:
         respuesta.message("🤖 No entendí ese mensaje. Por favor escriba un número del 1 al 5 o un saludo para ver el menú.")
 
