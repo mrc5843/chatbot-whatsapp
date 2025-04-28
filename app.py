@@ -1,3 +1,9 @@
+from flask import Flask, request
+from twilio.twiml.messaging_response import MessagingResponse
+import os
+
+app = Flask(__name__)
+
 @app.route('/webhook', methods=['POST'])
 def webhook():
     incoming_msg = request.form.get('Body', '').lower().strip()
@@ -43,4 +49,8 @@ def webhook():
         respuesta.message("🤖 No entendí ese mensaje. Por favor escriba un número del 1 al 5 o un saludo para ver el menú.")
 
     return str(respuesta)
+
+# Código para que funcione en Render correctamente
+if __name__ == '__main__':
+    puerto = int(os.environ.get('PORT',
 
